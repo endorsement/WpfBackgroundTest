@@ -40,19 +40,22 @@ namespace WpfApp1
 
 		private void DoWork(object sender, DoWorkEventArgs e)
 		{
-			for (int i = 0; i < 10; i++)
+			int count = 100;
+			for (int i = 0; i < count; i++)
 			{
 				if (worker.CancellationPending)
 				{
 					break;
 				}
-				Thread.Sleep(500);
+				Thread.Sleep(5);
 				System.Console.WriteLine("DoWork Call Before");
 				vs.Add("doworkadd_" + i);
-				this?.StateChangedEvent(vs);
-				worker.ReportProgress(i * 10);
+				var clone = new List<string>();
+				clone.AddRange(vs);
+				this?.StateChangedEvent(clone);
+				worker.ReportProgress(i * 100 / count);
 				System.Console.WriteLine("DoWork Call After");
-				Thread.Sleep(100);
+				Thread.Sleep(1);
 			}
 		}
 

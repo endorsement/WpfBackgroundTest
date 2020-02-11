@@ -17,7 +17,7 @@
         </StackPanel>
         <DockPanel Grid.Row="1">
             <TextBlock Text="Log" Margin="2,2,2,2" DockPanel.Dock="Top"/>
-            <TextBox Name ="TextBox" Margin="2,2,2,2" TextWrapping="Wrap" IsReadOnly="True"/>
+            <TextBox Name ="TextBox" Margin="2,2,2,2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
         </DockPanel>
     </Grid>
 </Window>

@@ -41,18 +41,22 @@ namespace WpfApp1
 
 		private void Model_StateChangedEventHandler(List<string> obj)
 		{
+			System.Console.WriteLine("Handler Enqueue Before");
 			cq.Enqueue(obj);
 			this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,
 				(Action)(() =>
 				{
 					var vs = new List<string>();
+					System.Console.WriteLine("Dispatcher Dnqueue Begin");
 					cq.TryDequeue(out vs);
+					System.Console.WriteLine("Dispatcher Dnqueue After");
 					TextBox.Text = "";
 					foreach (var item in vs)
 					{
 						TextBox.Text += item + "\r\n";
 					}
 				}));
+			System.Console.WriteLine("Handler Enqueue After");
 		}
 
 		private void StartButton_Click(object sender, RoutedEventArgs e)
