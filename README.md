@@ -1,0 +1,2 @@
+# WpfBackgroundTest
+BackGroundWorkerとか全くわからんのでお勉強
