@@ -11,12 +11,11 @@ namespace WpfApp1
 		public event Action<string> ProgressChangedEvent;
 		public event Action<string> CompletedEvent;
 
-		private BackgroundWorker worker;
-		private List<string> vs = new List<string>();
+		private readonly BackgroundWorker worker = new BackgroundWorker();
+		private readonly List<string> vs = new List<string>();
 
 		public Model()
 		{
-			worker = new System.ComponentModel.BackgroundWorker();
 			worker.DoWork += DoWork;
 			worker.RunWorkerCompleted += Completed;
 			worker.ProgressChanged += ProgressChanged;
@@ -40,7 +39,7 @@ namespace WpfApp1
 
 		private void DoWork(object sender, DoWorkEventArgs e)
 		{
-			int count = 100;
+			int count = 200;
 			for (int i = 0; i < count; i++)
 			{
 				if (worker.CancellationPending)

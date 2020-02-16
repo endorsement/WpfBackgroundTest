@@ -12,7 +12,7 @@ namespace WpfApp1
 	public partial class MainWindow : Window
 	{
 		private readonly Model model = new Model();
-		private readonly ConcurrentQueue<List<string>> cq = new ConcurrentQueue<List<string>>();
+		
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -41,22 +41,17 @@ namespace WpfApp1
 
 		private void Model_StateChangedEventHandler(List<string> obj)
 		{
-			System.Console.WriteLine("Handler Enqueue Before");
-			cq.Enqueue(obj);
 			this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,
 				(Action)(() =>
 				{
-					var vs = new List<string>();
-					System.Console.WriteLine("Dispatcher Dnqueue Begin");
-					cq.TryDequeue(out vs);
-					System.Console.WriteLine("Dispatcher Dnqueue After");
+					System.Console.WriteLine("Handler Enqueue Before");
 					TextBox.Text = "";
-					foreach (var item in vs)
+					foreach (var item in obj)
 					{
 						TextBox.Text += item + "\r\n";
 					}
+					System.Console.WriteLine("Handler Enqueue After");
 				}));
-			System.Console.WriteLine("Handler Enqueue After");
 		}
 
 		private void StartButton_Click(object sender, RoutedEventArgs e)
